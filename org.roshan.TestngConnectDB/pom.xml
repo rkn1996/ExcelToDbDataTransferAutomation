@@ -1,0 +1,94 @@
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.roshan.TestngDB</groupId>
+  <artifactId>org.roshan.TestngConnectDB</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+   
+  <dependencies>
+	 <!-- for Oracal DB connection used external download jars file -->
+	 
+	<!-- for TestNG jars-->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.8.0</version> 
+    </dependency>   
+	<!-- for Excel files-->
+	<dependency>
+    	<groupId>org.apache.poi</groupId>
+    	<artifactId>poi-ooxml</artifactId>
+    	<version>5.2.0</version>
+	</dependency>
+	<!-- for properties file-->
+	<dependency>
+    	<groupId>commons-configuration</groupId>
+    	<artifactId>commons-configuration</artifactId>
+    	<version>1.10</version>
+	</dependency>
+  </dependencies>
+  <!-- Plugins to run from CMD prompt-->
+  <profiles>
+    <!-- Profile to run individual test classes -->
+    <profile>
+        <id>run-specific-tests</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.2</version>
+                    <configuration>
+                        <source>11</source>
+                        <target>11</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <includes>
+                            <include>${testClasses}</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    <!-- Profile to run tests using a suite XML file -->
+    <profile>
+        <id>run-suite-xml</id>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.6.2</version>
+                    <configuration>
+                        <source>11</source>
+                        <target>11</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <executions>
+                        <execution>
+                            <id>execution2</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <suiteXmlFiles>
+                                    <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                                </suiteXmlFiles>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+  </profiles>  
+</project>
